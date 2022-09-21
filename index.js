@@ -3,13 +3,11 @@
 const express = require("express");  //express 모듈 import
 const router = express.Router();  // 라우팅 분리
 
-router.get("/", function(request, response) {
-    response.render("home/index");
-});
+const ctrl = require("./home.ctrl");
 
-router.get("/login", function(request, response) {
-    response.render("home/login");
-});
+router.get('/', ctrl.hello);
+
+router.get("/", ctrl.login);
 
 module.exports = router;
 
