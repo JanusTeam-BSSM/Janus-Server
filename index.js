@@ -1,6 +1,7 @@
-const jwt = require('jsonwebtoken');
-const express = require('express');
-const dotenv = require('dotenv');
+import jwt from 'jsonwebtoken';
+import express from 'express';
+import dotenv from 'dotenv';
+import auth from "./authMiddleware.js";
 
 const app = express();
 // 환경변수 사용선언
@@ -25,8 +26,8 @@ app.post("/login", (req, res, next) => {
         },
         key,
         {
-            expiresIn: "15m",
-            issuer: "토큰발급자",
+            expiresIn: "30m",
+            issuer: "http://localhost:3000",
         }
     );
 
@@ -38,41 +39,8 @@ app.post("/login", (req, res, next) => {
     });
 });
 
-app.listen(port, function() {
-    console.log("실행중");
-});
-/*const jwt = require("jsonwebtoken");
-const dotenv = require("dotenv");
-const app = require("express");
-
-dotenv.config();
-
-export const auth = (req, res, next) => {
-    const key = process.env.SECRET_KEY;
-    // 인증 완료
-    try {
-        req.decoded = jwt.verify(req.headers.authorization, key);
-        return next();
-    } catch(error) {
-        // 인증 실패
-        // 유효시간이 초과된 경우
-        if(error.name === "TokenExpiredError") {
-            return res.status(419).json({
-                code: 419,
-                message: "토큰이 만료되었습니다.",
-            });
-        }
-        // 토큰의 비밀키가 일치하지 않는 경우
-        if(error.name === "JsonWebTokenError") {
-            return res.status(401).json({
-                code: 401,
-                message: "유효하지 않은 토큰입니다."
-            })
-        }
-    }
-};*/
-
-/*app.get("/payload", auth, (req, res) => {
+app.get("/payload", auth, (req, res) => {
+    console.log("run");
     const nickname = req.decoded.nickname;
     const profile = req.decoded.profile;
     return res.status(200).json({
@@ -83,5 +51,10 @@ export const auth = (req, res, next) => {
             profile: profile
         }
     })
-})*/
+});
+
+app.listen(port, function() {
+    console.log("실행중");
+});
+
 
