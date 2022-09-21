@@ -8,6 +8,8 @@ app.get("/", function(request, response) {
     response.render("home/index");
 });
 
-app.get("/login", function(request, response) {
+app.get("/", function(request, response) {
     response.render("home/login");
-})
+});
+
+module.exports = app;
