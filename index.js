@@ -1,7 +1,7 @@
-import jwt from 'jsonwebtoken';
-import express from 'express';
-import dotenv from 'dotenv';
-import auth from "./authMiddleware.js";
+const jwt = require('jsonwebtoken');
+const express = require('express');
+const dotenv = require('dotenv');
+const auth = require("./authMiddleware");
 
 const app = express();
 // 환경변수 사용선언
