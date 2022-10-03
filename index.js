@@ -1,17 +1,24 @@
 const app = require("express")()
 const http = require("http").createServer(app)
 
-app.get('/', (req, res) => {
-    res.send("Node Server is running");
+require("dotenv").config();
+
+app.get('/hello', (req, res) => {
+    res.send('Node server is running....');
 });
 
 // Socket Logic
 const socketio = require('socket.io')(http)
 
-socketio.on("connection", (userSocket) => {
-    userSocket.on("send_message", (data) => {
-        userSocket.broadcast.emit("receive_message", data)
-    })
+socketio.on('connection', (socket) => {
+    console.log('a user connected');
+    socket.on('chat message', (msg) => {
+      socketio.emit('chat message', msg);
+    });
+    socket.on('disconnect', () => {
+        console.log('user disconnected');
+    });
+  });
+http.listen(process.env.PORT, '0.0.0.0',() => {
+    console.log(`Server running at http://0.0.0.0:${process.env.PORT}/`);
 });
-
-http.listen(process.env.PORT);
