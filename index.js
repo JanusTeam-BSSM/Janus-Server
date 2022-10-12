@@ -19,6 +19,6 @@ socketio.on('connection', (socket) => {
         console.log('user disconnected');
     });
   });
-http.listen(process.env.PORT, '0.0.0.0',() => {
-    console.log(`Server running at http://0.0.0.0:${process.env.PORT}/`);
+http.listen(process.env.PORT, 'localhost',() => {
+    console.log(`Server running at http://127.0.0.1:${process.env.PORT}/`);
 });
