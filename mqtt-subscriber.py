@@ -19,11 +19,11 @@ try :
     broker_address = "localhost"
     client1 = mqtt.Client("client1") 
     client1.connect(broker_address)
-    client1.subscribe("camera/data") 
+    client1.subscribe("hello") 
     client1.on_message = on_message
     client1.loop_forever()
 
 except KeyboardInterrupt:
     pass
 except Exception:
-    print(Exception)
+    print("Error!")
