@@ -1,6 +1,6 @@
 const aedes = require("aedes")();
 const mqttBroker = require("net").createServer(aedes.handle);
-const mqttPort = 1883; // 📌 127.0.0.1
+const mqttPort = 2500; // 📌 127.0.0.1
 
 mqttBroker.on("connection", (_) => console.log(`CONNECT`));
 aedes.on("subscribe", (topic, client) => {

@@ -1,5 +1,5 @@
 const mqtt = require("mqtt"),
-  client = mqtt.connect("mqtt://127.0.0.1:1883");
+  client = mqtt.connect("mqtt://127.0.0.1:2500");
 const readline = require("readline"),
   rl = readline.createInterface({
     input: process.stdin,
